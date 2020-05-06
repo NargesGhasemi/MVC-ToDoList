@@ -10,7 +10,7 @@ class model {
 
   _currentTab = "";
 
-  _commit(todos , tabLink) {
+  _changeList(tabLink) {
     switch (tabLink) {
       case "allBtn":
         this.filterTodos = this.todos;
@@ -36,7 +36,7 @@ class model {
     }
     this.todos.push(todo);
 
-    this._commit(this.todos, this._currentTab);
+    this._changeList(this._currentTab);
   }
 
   // Map through all todos, and replace the text of the todo with the specified id
@@ -45,14 +45,14 @@ class model {
       todo.id === id ? { id: todo.id, text: updatedText, complete: todo.complete } : todo
     );
 
-    this._commit(this.todos,  this._currentTab);
+    this._changeList(this._currentTab);
   }
 
   // Filter a todo out of the array by id
   deleteTodo(id) {
     this.todos = this.todos.filter(todo => todo.id !== id);
 
-    this._commit(this.todos, this._currentTab);
+    this._changeList(this._currentTab);
   }
 
   // Flip the complete boolean on the specified todo  
@@ -61,12 +61,12 @@ class model {
       todo.id === id ? { id: todo.id, text: todo.text, complete: !todo.complete } : todo
     );
 
-    this._commit(this.todos,  this._currentTab);
+    this._changeList(this._currentTab);
   }
 
   // Filter a todo out of the array by id  
   filterTodo(tabLink) {
     this._currentTab = tabLink;
-    this._commit(this.todos, tabLink);
+    this._changeList(tabLink);
   }
 }
