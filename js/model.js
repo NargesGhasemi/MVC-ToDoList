@@ -1,6 +1,7 @@
 class model {
   constructor() {
-    this.todos = [];
+     //get last todolist's data from local storage
+    this.todos = JSON.parse(localStorage.getItem ('todos')) || [];
     this.filterTodos = [];
   }
 
@@ -26,6 +27,8 @@ class model {
         break;
     }
     this.onTodoListChanged(this.filterTodos);
+    //save todolist's data in local storage
+    localStorage.setItem('todos', JSON.stringify(this.todos)) ;
   }
 
   addTodo(todoText) {
