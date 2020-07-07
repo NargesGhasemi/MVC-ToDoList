@@ -1,7 +1,7 @@
 class model {
   constructor() {
      //get last todolist's data from local storage
-    this.todos = JSON.parse(localStorage.getItem ('todos')) || [];
+    this.todos = this.getLocalStorage();
     this.filterTodos = [];
   }
 
@@ -28,7 +28,7 @@ class model {
     }
     this.onTodoListChanged(this.filterTodos);
     //save todolist's data in local storage
-    localStorage.setItem('todos', JSON.stringify(this.todos)) ;
+    this.setLocalStorage();
   }
 
   addTodo(todoText) {
@@ -71,5 +71,15 @@ class model {
   filterTodo(tabLink) {
     this._currentTab = tabLink;
     this._changeList(tabLink);
+  }
+
+  //get last todolist's data from local storage
+ getLocalStorage(){
+    return JSON.parse(localStorage.getItem('todos')) || [];
+  }
+
+ //save todolist's data in local storage
+  setLocalStorage(){
+    localStorage.setItem ('todos', JSON.stringify(this.todos));
   }
 }
